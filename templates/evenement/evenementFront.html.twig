@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+
+{% block about %}
+    <br><br><br>
+
+
+    <section class="ftco-section bg-light" id="blog-section">
+        <div class="container">
+
+
+
+
+
+
+
+            <div class="row justify-content-center mb-5 pb-5">
+
+
+
+
+
+
+            <div class="row justify-content-center mb-5 pb-5">
+                <div class="col-md-10 heading-section text-center ftco-animate">
+                    <h2 class="mb-4">Nos évènements</h2>
+                    <p>Choisissez l'évènement qui vous convient parmi une multitude d'évènements </p>
+                </div>
+            </div>
+
+
+
+
+                    <div class="container">
+                        <h5 class="mb-3">Recherche</h5>
+
+                        {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    {{ form_label(form.titre,"titre") }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.titre, {'label':false,'attr':{'class':'form-control '}}) }}
+
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary">Rechercher </button>
+                                </div>
+
+                                <div class="form-group">
+                                    <a href="{{ path('eventfront') }}" class="btn btn-secondary">Afficher Tous les évenements </a>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                    {{ form_end(form) }}
+
+
+
+
+
+
+
+
+
+
+
+            <div class="row d-flex">
+
+
+
+                {% for evenement in evenements %}
+
+
+
+
+                    <div style="margin: -5px" class="col-md-4 ftco-animate">
+                        <div class="blog-entry">
+{#
+                            <a href="{{ path('lireplusevenement_index', {'id': evenement.getIdEvent()}) }}" class="block-20" >
+#}
+
+                                <img style="width: 80%" src="{{ asset('imgEvent/')~ evenement.image }}"  >
+                            </a>
+                            <div class="text d-block">
+                                <div class="meta mb-3">
+                                    <div>
+                                        <a style="font-size:15px">Date : {{ evenement.dateEvent ? evenement.dateEvent|date('d-m-Y') : '' }}</a></div>
+
+                                </div>
+
+                                <h3 class="heading">
+
+                                    <a  style="font-size:25px;text-transform: uppercase;">{{ evenement.titre }}</a>
+
+                                </h3>
+                                <p>{{ evenement.description }}</p>
+                                <div class="meta mb-3">
+                                    <div><a  style="font-size:20px">{{ evenement.tarif }} dt</a></div>
+                                    <div class="tagcloud">
+                                        <a href="#" class="tag-cloud-link">{{ evenement.categorie }}</a>
+
+                                    </div>
+                                </div>
+                                   <p><a  href="{{ path('reserver', {'id': evenement.getIdEvent()}) }}"  class="btn btn-primary py-4 px-5" style="font-size: 15px">Réserver</a></p>
+
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <p style="text-align: center">Désolé, aucun événement ne correspond à votre recherche</p>
+                {% endfor %}
+
+
+            </div>
+
+
+
+        </div>
+        </div>
+    </section>
+
+    <br><br>
+    <div class="pagination">
+        {{ knp_pagination_render(evenements) }}
+    </div>
+{% endblock %}

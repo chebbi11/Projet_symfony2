@@ -1,0 +1,62 @@
+{% extends 'base1.html.twig' %}
+
+
+{% block body %}
+    <br><br><br>
+
+    <div  style="padding: 35px;margin: 35px" >
+    <h1>Evenement index</h1>
+        <a class="btn btn-primary py-4 px-5" style="    background-color: #008616; border-color: #ffffff; padding: 2px;margin: 2px" href="{{ path('app_evenement_new') }}">Create new</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdEvent</th>
+                <th>Categorie</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Lieu</th>
+                <th>DateEvent</th>
+                <th>Image</th>
+                <th>Tarif</th>
+                <th>Capacite</th>
+                <th>NbReservation</th>
+                <th>Etat</th>
+                <th>Pour</th>
+                <th>DateAjout</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.idEvent }}</td>
+                <td>{{ evenement.categorie }}</td>
+                <td>{{ evenement.titre }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.lieu }}</td>
+                <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.image }}</td>
+                <td>{{ evenement.tarif }}</td>
+                <td>{{ evenement.capacite }}</td>
+                <td>{{ evenement.nbReservation }}</td>
+                <td>{{ evenement.etat }}</td>
+                <td>{{ evenement.pour }}</td>
+                <td>{{ evenement.dateAjout ? evenement.dateAjout|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a class="btn btn-primary py-4 px-5"style="padding: 2px;margin: 2px" href="{{ path('app_evenement_show', {'idEvent': evenement.idEvent}) }}">show</a>
+                    <a class="btn btn-primary py-4 px-5"  style="padding: 2px;margin: 2px" href="{{ path('app_evenement_edit', {'idEvent': evenement.idEvent}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{#    <a class="btn btn-primary py-4 px-5" style="    background-color: #008616; border-color: #ffffff; padding: 2px;margin: 2px" href="{{ path('app_evenement_new') }}">Create new</a>#}
+
+    </div>
+{% endblock %}
