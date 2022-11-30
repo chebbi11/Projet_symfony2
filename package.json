@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/assets",
+    "build-asset": "^2.0.6",
+    "chart.js": "^3.4.1"
+  },
+  "dependencies": {
+    "@symfony/webpack-encore": "^4.1.2",
+    "build": "^0.1.4",
+    "mysql": "^2.18.1",
+    "webpack-notifier": "^1.15.0"
+  },
+  "name": "symfony",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --watch --progress"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
