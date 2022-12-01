@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br><br>
+<center>
+    
+               <h1>Edit Achat</h1>
+
+    {{ include('achat/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_achat_index') }}">back to list</a>
+
+    {{ include('achat/_delete_form.html.twig') }}
+</center>
+<br><br>
+{% endblock %}

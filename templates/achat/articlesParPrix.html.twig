@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block title%} Liste des Articles par prix{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+
+<div class="form-row align-items-end" >
+ <div class="col">
+   {{ form_row(form.minPrice) }}
+ </div>
+ <div class="col">
+   {{ form_row(form.maxPrice) }}
+ </div>
+
+  <div class="col">
+   <div class="form-group">
+      <button type="submit" class="btn btn-success">Rechercher</button>
+    </div>
+ </div>
+</div>
+ {{ form_end(form) }}
+
+ {% if produits %}
+    <table id="articles" class="table table-striped">
+      
+      <tbody>
+        {% for product in produits %}
+            <div class="col-4 mt-4">
+                <div class="border border-dark rounded p-2 clearfix">
+                    <h2>{{ product.nom }}</h2>
+                    <p>{{ product.prix }} Dt</p>
+                    <h4>quantite disponible {{ product.quantite }}</h4>
+                    
+{% if product.quantite == 0 %}
+     <h2>En rupture de stock</h2>
+{% else%}
+<h2>En stock</h2>  
+{% endif %}
+                    
+                    <img class="w-100" src="{{asset('assets/images/Pharmacie.png')}}" alt="Image de {{ product.nom }}">
+                    <hr>
+                    {% if product.quantite == 0 %}
+                        <button>
+                        <i class="bi bi-cart-plus"></i> Ajouter au panier
+                    </button>
+                    {% else%}
+
+                    <a href="{{path('app_add_panier', {id: product.id})}}" class="btn btn-success">
+                        <i class="bi bi-cart-plus"></i> Ajouter au panier
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Aucun articles</p>
+  {% endif %} 
+  <a class="btn btn-primary" href="{{path('app_achat_index')}}">liste des produits</a>
+{% endblock %}

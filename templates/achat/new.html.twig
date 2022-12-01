@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br><br>
+<center>
+   <h1>Create new Achat</h1>
+
+    {{ include('achat/_form.html.twig', {'button_label': 'new'}) }}
+
+    <a href="{{ path('app_achat_index') }}">back to list</a>
+</center>
+<br><br>
+{% endblock %}

@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br><br>
+<center>
+<center>
+{{ form_start(form) }}
+
+<div class="form-row align-items-end" >
+ <div class="col">
+   {{ form_row(form.nom) }}
+ </div>
+
+  <div class="col">
+   <div class="form-group">
+      <button type="submit" class="btn btn-success">Rechercher</button>
+    </div>
+ </div>
+</div>
+ {{ form_end(form) }}
+ </center>
+
+
+ <li class="nav-item">
+ <a href="{{path('article_par_prix')}}" class="nav-link"> Recherche par PRIX </a>
+ </li>
+    
+
+
+               <h1>Les medicaments disponibles</h1>
+    </section>
+
+    <section class="row">
+        {% for product in produits %}
+            <div class="col-4 mt-4">
+                <div class="border border-dark rounded p-2 clearfix">
+                    <h2>{{ product.nom }}</h2>
+                    <p>{{ product.prix }} Dt</p>
+                    <h4>quantite disponible {{ product.quantite }}</h4>
+                    
+{% if product.quantite == 0 %}
+     <h2>En rupture de stock</h2>
+{% else%}
+<h2>En stock</h2>  
+{% endif %}
+                    
+                    <img class="w-100" src="{{asset('assets/images/Pharmacie.png')}}" alt="Image de {{ product.nom }}">
+                    <hr>
+                    {% if product.quantite == 0 %}
+                        <button>
+                        <i class="bi bi-cart-plus"></i> Ajouter au panier
+                    </button>
+                    {% else%}
+
+                    <a href="{{path('app_add_panier', {id: product.id})}}" class="btn btn-success">
+                        <i class="bi bi-cart-plus"></i> Ajouter au panier
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+
+
+    
+        <a class="btn btn-primary" href="{{path('app_achat_print')}}">imprimer panier</a>
+        <a class="btn btn-primary" href="{{path('app_panier')}}">Panier</a>
+
+
+
+
+{#<h1>Votre panier</h1>
+    </section>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for element in achats %}
+                <tr>
+                    <td>{{ element.produit.nom }}</td>
+                    <td class="text-end">{{ element.produit.prix }} dt</td>
+                    <td>{{ element.quantite }}</td>
+                    <td class="text-end">{{ element.quantite * element.produit.prix }} dt</td>
+                    <td>
+                        <a href="{{path("app_achat_new", {id: element.produit.id})}}" class="btn btn-success">ajouter
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+                        <a href="{{path("app_achat_edit", {id: element.produit.id})}}" class="btn btn-warning">modifier achat
+                            <i class="bi bi-cart-dash"></i>
+                        </a>
+                        <a href="{{path("app_achat_delete", {id: element.produit.id})}}" class="btn btn-danger">supprimer achat
+                            <i class="bi bi-cart-x"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">Votre panier est vide</td>
+                </tr>
+            {% endfor %}
+        </tbody>#}
+
+       {# <tfoot>
+            <tr>
+                <td colspan="3">Total</td>
+                <td class="text-end">{{ total }} €</td>
+                <td>
+                    <a href="{{path("cart_delete_all")}}" class="btn btn-danger">
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                </td>
+            </tr>
+        </tfoot> #} 
+    </table>
+
+  {# <h1>Mon panier</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+               <th> nom du medicament</th>
+                <th>Prix</th>
+                <th>Quantite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for achat in achats %}
+            <tr>
+               <td> {{ achat.produit.nom }}</td>  
+                <td>{{ achat.prix }}</td>
+                <td>{{ achat.quantite }}</td>
+                <td>
+                    <a href="{{ path('app_achat_show', {'id': achat.id}) }}">show</a>
+                    <a href="{{ path('app_achat_edit', {'id': achat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_achat_new') }}">Create new</a>
+    #}
+    
+
+
+                    
+</center>
+<br><br>
+{% endblock %}

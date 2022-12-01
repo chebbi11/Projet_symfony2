@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br><br>
+
+   <center>
+   <h1>Votre panier</h1>
+    </center>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for element in dataPanier %}
+                <tr>
+                    <td>{{ element.produits.nom }}</td>
+                    <td class="text-end">{{ element.produits.prix }} dt</td>
+                    <td>{{ element.quantite }}</td>
+                    <td class="text-end">{{ element.quantite * element.produits.prix }} dt</td>
+                    <td>
+                        <a href="{{path("app_add_panier", {id: element.produits.id})}}" class="btn btn-success">+
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+                        <a href="{{path("app_panier_remove", {id: element.produits.id})}}" class="btn btn-warning">-
+                            <i class="bi bi-cart-dash"></i>
+                        </a>
+                        <a href="{{path("app_panier_delete", {id: element.produits.id})}}" class="btn btn-danger">supprimer 
+                            <i class="bi bi-cart-x"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">Votre panier est vide</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+       <tfoot>
+            <tr>
+                <td colspan="3">Total</td>
+                <td class="text-end">{{ total }} dt</td>
+                <td></td>
+               <td>
+                    <a href="{{path("panier_delete_all")}}" class="btn btn-danger"> Supprimer le panier
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                </td> 
+            </tr>
+        </tfoot> 
+    </table>
+
+  {# <h1>Mon panier</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+               <th> nom du medicament</th>
+                <th>Prix</th>
+                <th>Quantite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for achat in achats %}
+            <tr>
+               <td> {{ achat.produit.nom }}</td>  
+                <td>{{ achat.prix }}</td>
+                <td>{{ achat.quantite }}</td>
+                <td>
+                    <a href="{{ path('app_achat_show', {'id': achat.id}) }}">show</a>
+                    <a href="{{ path('app_achat_edit', {'id': achat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {#<a href="{{ path('app_achat_new') }}">Create new</a>#}
+    <a class="btn btn-primary" href="{{path('app_achat_print')}}">imprimer panier</a>
+    <br>
+    <br>
+    <a class="btn btn-primary" href="{{path('app_achat_index')}}">liste des produits</a>
+
+
+
+
+
+<br><br>
+{% endblock %}
